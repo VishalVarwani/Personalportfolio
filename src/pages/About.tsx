@@ -6,20 +6,43 @@ import { education, extracurricular, profile } from "@/data/profile";
 import { skillGroups } from "@/data/skills";
 import headshot from "@/assets/headshot.jpg";
 
+const meta = [
+  { label: "Based in", value: "Ludwigshafen, Germany" },
+  { label: "Open to", value: "AI / ML roles in Europe" },
+  { label: "Degree", value: "MSc Applied Data Science" },
+  { label: "Focus", value: "AI agents · RAG · MLOps" },
+];
+
 export function About() {
   return (
     <>
       <Section className="pt-16 pb-20 sm:pt-24">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-12">
+
+          {/* Left column — photo + meta labels */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="w-52 shrink-0 overflow-hidden rounded-2xl border border-border sm:w-64"
+            className="w-56 shrink-0 sm:w-64"
           >
-            <img src={headshot} alt={profile.name} className="h-auto w-full" />
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <img src={headshot} alt={profile.name} className="h-auto w-full" />
+            </div>
+
+            <div className="mt-5 space-y-3">
+              {meta.map(({ label, value }) => (
+                <div key={label} className="flex flex-col gap-0.5">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
+                    {label}
+                  </p>
+                  <p className="text-sm text-ink-soft">{value}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
+          {/* Right column — headline + bio */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,6 +78,7 @@ export function About() {
               </p>
             </div>
           </motion.div>
+
         </div>
       </Section>
 
