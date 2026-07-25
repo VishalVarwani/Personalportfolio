@@ -1,0 +1,104 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-paper: #faf9f6;
+  --bg-paper-subtle: #f2f0ea;
+  --bg-surface: #ffffff;
+  --bg-border: #e6e3da;
+  --bg-ink: #1b1a17;
+  --bg-ink-soft: #4a4740;
+  --bg-ink-faint: #8a856f;
+  --bg-accent: #b5502c;
+  --bg-accent-soft: #f0e0d3;
+  --bg-accent-ink: #ffffff;
+}
+
+.dark {
+  --bg-paper: #100f0d;
+  --bg-paper-subtle: #17160f;
+  --bg-surface: #1a1912;
+  --bg-border: #2c2a20;
+  --bg-ink: #f3f1e9;
+  --bg-ink-soft: #c9c4b3;
+  --bg-ink-faint: #837e6c;
+  --bg-accent: #e08356;
+  --bg-accent-soft: #2c1d15;
+  --bg-accent-ink: #100f0d;
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --color-paper: var(--bg-paper);
+  --color-paper-subtle: var(--bg-paper-subtle);
+  --color-surface: var(--bg-surface);
+  --color-border: var(--bg-border);
+  --color-ink: var(--bg-ink);
+  --color-ink-soft: var(--bg-ink-soft);
+  --color-ink-faint: var(--bg-ink-faint);
+  --color-accent: var(--bg-accent);
+  --color-accent-soft: var(--bg-accent-soft);
+  --color-accent-ink: var(--bg-accent-ink);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink-soft);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
