@@ -1,11 +1,8 @@
-import { useState } from "react";
-import { ChevronDown, Trophy } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { Section } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
-import { motion, AnimatePresence } from "framer-motion";
 import { experience } from "@/data/experience";
 import { achievements } from "@/data/achievements";
-import { cn } from "@/lib/utils";
 
 function ExperienceCard({
   entry,
@@ -14,8 +11,6 @@ function ExperienceCard({
   entry: (typeof experience)[number];
   index: number;
 }) {
-  const [expanded, setExpanded] = useState(false);
-
   return (
     <Reveal delay={index * 0.08} className="border-b border-border py-10 first:pt-0 last:border-b-0">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
@@ -30,48 +25,13 @@ function ExperienceCard({
       </div>
 
       <ul className="mt-5 space-y-3">
-        {entry.core.map((bullet, i) => (
+        {entry.bullets.map((bullet, i) => (
           <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
             {bullet}
           </li>
         ))}
       </ul>
-
-      <AnimatePresence initial={false}>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <ul className="space-y-3 pt-3">
-              {entry.more.map((bullet, i) => (
-                <li key={i} className="flex gap-3 text-sm leading-relaxed text-ink-soft">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ink-faint" />
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {entry.more.length > 0 && (
-        <button
-          type="button"
-          onClick={() => setExpanded((e) => !e)}
-          className="mt-4 inline-flex items-center gap-1 text-sm text-ink-faint transition-colors hover:text-accent"
-        >
-          {expanded ? "Show less" : `Show ${entry.more.length} more`}
-          <ChevronDown
-            size={14}
-            className={cn("transition-transform", expanded && "rotate-180")}
-          />
-        </button>
-      )}
     </Reveal>
   );
 }
