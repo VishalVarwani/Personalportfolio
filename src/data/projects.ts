@@ -184,8 +184,6 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/VishalVarwani/clutchtimeai-release",
-      download:
-        "https://github.com/VishalVarwani/clutchtimeai-release/releases/download/v1.0.0/ClutchTimeAI-Setup.exe",
     },
     featured: true,
   },

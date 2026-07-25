@@ -4,6 +4,7 @@ export interface ExperienceEntry {
   title: string;
   period: string;
   location: string;
+  highlight: string;
   core: string[];
   more: string[];
 }
@@ -15,6 +16,8 @@ export const experience: ExperienceEntry[] = [
     title: "Working Student, AI Engineer",
     period: "April 2025 – April 2026",
     location: "Darmstadt, Germany",
+    highlight:
+      "LangGraph agents in production, cutting manual document processing by 65% and hitting 88% RAG accuracy.",
     core: [
       "Built a LangGraph agent pipeline on GCP that automates end-to-end extraction of environmental compliance data from government portals and PDF reports, cutting manual document processing time across the research team by about 65%.",
       "Implemented domain RAG with hybrid search, combining dense Voyage AI embeddings in Pinecone with sparse BM25 retrieval and cross-encoder reranking. Reached about 88% query accuracy across 1,200+ indexed documents and took document retrieval from manual hours down to seconds.",
@@ -34,6 +37,8 @@ export const experience: ExperienceEntry[] = [
     title: "Research Student, Sales Forecasting",
     period: "November 2024 – March 2025",
     location: "Heidelberg, Germany",
+    highlight:
+      "Demand forecasting in PyTorch across two country markets, improving accuracy 12-18% over baseline.",
     core: [
       "Built an hourly demand forecasting model in PyTorch for retail and marketplace clients across high-variance product categories and two country markets, improving forecast accuracy by 12-18% over baseline and cutting overstock and stockout prediction errors by about 40%.",
       "Designed the end-to-end data pipeline pulling raw sales data from PostgreSQL, using SQL transformations to resolve missing values, schema mismatches, and multi-country format inconsistencies before training.",
@@ -51,6 +56,8 @@ export const experience: ExperienceEntry[] = [
     title: "Data Engineer Intern",
     period: "April 2023 – January 2024",
     location: "Mumbai, India",
+    highlight:
+      "Python ETL pipelines processing 50M+ records monthly across 5 client REST APIs into PostgreSQL.",
     core: [
       "Built and maintained Python ETL pipelines ingesting raw transaction data from 5 client REST APIs into a centralized PostgreSQL warehouse, normalizing schemas across inconsistent source formats and processing 50M+ records monthly.",
       "Designed Airflow DAGs orchestrating daily ingestion, transformation, and aggregation across 3 retail client pipelines, adding SLA breach alerts and failure notifications that cut undetected pipeline downtime by about 80%.",

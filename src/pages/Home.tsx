@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Section } from "@/components/Section";
-import { Reveal, RevealGroup, revealItem } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import { ProjectCard } from "@/components/ProjectCard";
 import { StatCounter } from "@/components/StatCounter";
+import { HeroArt } from "@/components/HeroArt";
+import { ExperiencePreview } from "@/components/ExperiencePreview";
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
@@ -14,81 +16,104 @@ const featured = homeProjects
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
 const stats = [
-  { value: "1,000", label: "JobMate users, zero paid marketing" },
-  { value: "88%", label: "RAG query accuracy at e.Ray" },
-  { value: "2", label: "hackathon podium finishes" },
+  { value: "1,000", label: "JobMate users" },
+  { value: "88%", label: "RAG accuracy at e.Ray" },
+  { value: "2", label: "hackathon podiums" },
   { value: "9", label: "shipped AI projects" },
 ];
 
 export function Home() {
   return (
     <>
-      <Section className="pt-20 pb-24 sm:pt-28 sm:pb-32">
-        <motion.p
+      <Section className="pt-16 pb-16 sm:pt-24">
+        <div className="grid items-center gap-10 sm:grid-cols-[1.1fr_0.9fr] sm:gap-8">
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="font-mono text-sm text-accent"
+            >
+              Hi, I'm {profile.name.split(" ")[0]}
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-4 text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl"
+            >
+              {profile.tagline}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-5 max-w-md text-base leading-relaxed text-ink-soft"
+            >
+              AI engineer working across RAG, LangGraph agents, and the infrastructure that
+              keeps them running in production. Based in Germany.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
+              <Link
+                to="/experience"
+                className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5"
+              >
+                See my experience
+                <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <Link
+                to="/work"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:border-accent hover:text-accent"
+              >
+                View projects
+              </Link>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto w-full max-w-[340px] sm:max-w-none"
+          >
+            <HeroArt />
+          </motion.div>
+        </div>
+
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="font-mono text-sm text-accent"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 grid grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4"
         >
-          Hi, I'm {profile.name.split(" ")[0]}
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-4 max-w-3xl text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl md:text-6xl"
-        >
-          {profile.tagline}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
-        >
-          I'm an AI engineer working across RAG, LangGraph agents, and the unglamorous
-          infrastructure that keeps them running in production.
-          <br className="hidden sm:block" /> Currently: {profile.currently}.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-9 flex flex-wrap items-center gap-3"
-        >
-          <Link
-            to="/work"
-            className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5"
-          >
-            See the work
-            <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
-          </Link>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:border-accent hover:text-accent"
-          >
-            Get in touch
-          </Link>
+          {stats.map((s) => (
+            <StatCounter key={s.label} value={s.value} label={s.label} />
+          ))}
         </motion.div>
       </Section>
 
-      <Section className="pb-24">
-        <RevealGroup className="grid grid-cols-2 gap-8 border-y border-border py-10 sm:grid-cols-4">
-          {stats.map((s) => (
-            <motion.div key={s.label} variants={revealItem}>
-              <StatCounter value={s.value} label={s.label} />
-            </motion.div>
-          ))}
-        </RevealGroup>
+      <Section className="pb-28">
+        <Reveal>
+          <p className="font-mono text-sm text-accent">Experience</p>
+          <h2 className="mt-3 text-2xl font-medium text-ink">
+            Three companies, two years, one thread.
+          </h2>
+        </Reveal>
+        <div className="mt-10">
+          <ExperiencePreview />
+        </div>
       </Section>
 
       <Section className="pb-28">
         <Reveal className="mb-8 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-medium text-ink">Selected work</h2>
-            <p className="mt-1.5 text-sm text-ink-faint">
-              A few of the systems I've built, end to end.
-            </p>
+            <p className="font-mono text-sm text-accent">Work</p>
+            <h2 className="mt-3 text-2xl font-medium text-ink">Selected projects</h2>
           </div>
           <Link
             to="/work"
@@ -111,25 +136,6 @@ export function Home() {
             View all work
             <ArrowUpRight size={14} />
           </Link>
-        </Reveal>
-      </Section>
-
-      <Section className="pb-28">
-        <Reveal className="rounded-2xl border border-border bg-surface p-8 sm:p-10">
-          <p className="text-lg leading-relaxed text-ink-soft sm:text-xl">
-            Most of what I build sits between a model and the parts of a system that have to
-            not break: retrieval that's actually grounded, agents that stop and ask before doing
-            something expensive, pipelines that survive a bad day of upstream data.
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
-              to="/about"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-accent"
-            >
-              More about me
-              <ArrowRight size={14} />
-            </Link>
-          </div>
         </Reveal>
       </Section>
     </>
